@@ -2,7 +2,6 @@ import unittest
 
 from parent_node import ParentNode
 from leaf_node import LeafNode
-from random import randint
 
 class TestParentNode(unittest.TestCase):
     def test_to_html_with_children(self):
