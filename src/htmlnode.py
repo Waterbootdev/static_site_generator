@@ -10,9 +10,10 @@ class HTMLNode:
         self.props = {} if props is None else  props if type(props) is dict else HTMLNode.raise_exception() 
         # dict key-value pairs representing attributes
 
+    
     @staticmethod
     def raise_exception():
-        raise Exception()
+        raise ValueError()
 
     def to_html(self):
         raise NotImplementedError()
