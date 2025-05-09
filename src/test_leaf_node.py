@@ -26,3 +26,7 @@ class TestLeafNode(unittest.TestCase):
         except ValueError:
             raised = True
         self.assertTrue(raised and node is None)
+
+
+if __name__ == "__main__":
+    unittest.main()
