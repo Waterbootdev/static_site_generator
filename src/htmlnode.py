@@ -2,7 +2,7 @@ from functools import reduce
 class HTMLNode:
     def __init__(self, tag=None, value=None, children=None, props=None):
         
-        HTMLNode._validate_parameters(tag, value, children, props)
+        HTMLNode._validate_parameters_or_rais_value_error(tag, value, children, props)
 
         self.value = value
         self.children = children 
@@ -10,7 +10,7 @@ class HTMLNode:
         self.props = {} if props is None else  props 
 
     @staticmethod
-    def _validate_parameters(tag, value, children, props):
+    def _validate_parameters_or_rais_value_error(tag, value, children, props):
         if value is None and children is None:
             HTMLNode._raise_exception("value or children has to be not none")
 
