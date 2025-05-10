@@ -1,7 +1,7 @@
 from textnode import TextNode, TextType
-from commen_helpers import apply_pair, alternated_seq, reduce_lists, is_odd
+from commen_helpers import apply_pair, alternated_seq, reduce_lists, is_odd, apply_tripple
 from delimiter_text_type import DelimiterTextType
-
+from extract_markdown import extract_markdown_images_tip, extract_markdown_links_tip
 class NORMALTextNode(TextNode):
 
     def __init__(self, text):
@@ -56,4 +56,59 @@ class NORMALTextNode(TextNode):
             return node.split_node_delimiter(delimiter_text_type) if isinstance(node, NORMALTextNode) else [node] 
         return reduce_lists(map(split_node_delimiter, nodes))
 
-     
+    @staticmethod
+    def apply_split_node(split_node):
+        def apply_split_node(node):
+            return split_node(node) if isinstance(node, NORMALTextNode) else [node]
+        return apply_split_node
+    
+    @apply_split_node
+    @staticmethod
+    def _split_node_image(node):
+        return node.split_node_image()    
+    
+    @apply_split_node
+    @staticmethod
+    def _split_node_link(node):
+        return node.split_node_link()    
+
+    @ apply_tripple
+    @staticmethod
+    def split_extracted(text_type, text, extracted):
+        nodes = []
+
+        def append_text_node(text):
+            if len(text) > 0:
+                nodes.append(NORMALTextNode(text))
+
+        @apply_pair
+        def append_text_type_node(text, url):
+            nodes.append(TextNode(text=text, text_type=text_type, url=url))
+
+        for current in extracted:
+            current_splited = text.split(current[1], maxsplit=1)
+            append_text_node(current_splited[0])
+            append_text_type_node(current[0])
+            text = current_splited[1]
+        append_text_node(text)
+    
+        return nodes
+
+    def split_node_image(self):
+        return NORMALTextNode.split_extracted(extract_markdown_images_tip(self.text))
+    
+    def split_node_link(self):
+        return NORMALTextNode.split_extracted(extract_markdown_links_tip(self.text))
+ 
+    @staticmethod
+    def apply_split_nodes(split_node, nodes):
+        return reduce_lists(map(split_node, nodes))
+      
+    @staticmethod
+    def split_nodes_image(nodes):
+        return NORMALTextNode.apply_split_nodes(NORMALTextNode._split_node_image, nodes)
+    
+    @staticmethod
+    def split_nodes_link(nodes):
+        return NORMALTextNode.apply_split_nodes(NORMALTextNode._split_node_link, nodes)
+    

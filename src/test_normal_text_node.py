@@ -44,10 +44,24 @@ class TestNORMALTextNode(unittest.TestCase):
        
         test_with_one_delimiter_even_number_delimiters_sub(text, "**",  TextType.BOLD, DelimiterTextType.BOLD) 
         test_with_one_delimiter_even_number_delimiters_sub(text, "_",  TextType.ITALIC, DelimiterTextType.ITALIC) 
-        test_with_one_delimiter_even_number_delimiters_sub(text, "`",  TextType.CODE, DelimiterTextType.CODE) 
-      
-
+        test_with_one_delimiter_even_number_delimiters_sub(text, "`",  TextType.CODE, DelimiterTextType.CODE)
     
-
+    def test_split_images(self):
+         node = NORMALTextNode(
+            "This is text with an ![image](https://i.imgur.com/zjjcJKZ.png) and another ![second image](https://i.imgur.com/3elNhQu.png)"
+         )
+         new_nodes = NORMALTextNode.split_nodes_image([node])
+         self.assertListEqual(
+            [
+                  TextNode("This is text with an ", TextType.NORMAL),
+                  TextNode("image", TextType.IMAGES, "https://i.imgur.com/zjjcJKZ.png"),
+                  TextNode(" and another ", TextType.NORMAL),
+                  TextNode(
+                     "second image", TextType.IMAGES, "https://i.imgur.com/3elNhQu.png"
+                  ),
+            ],
+            new_nodes,
+         )
+    
 if __name__ == "__main__":
     unittest.main()
