@@ -22,4 +22,4 @@ class DelimiterTextType(Enum):
                 return DelimiterTextType.CODE
             case _:
                 raise ValueError(f"no DelimiterTextType for {(delimiter_text, text_type)}") 
-    
+     

@@ -14,7 +14,7 @@ def add_text_type_to_extract_markdown(text_type):
                 case TextType.IMAGES:
                     return f('!', text, url)
                 case TextType.LINKS:
-                    return f(' ', text, url)
+                    return f('', text, url)
                 case _:
                     return ValueError(f"text_type has to be TextType.IMAGES or TextType.LINKS not{text_type}")
        
@@ -43,8 +43,7 @@ def extract_markdown_images_tip(text):
 def extract_markdown_links_tip(text):
     return findall(r"(?<!!)\[([^\[\]]*)\]\(([^\(\)]*)\)",text)
 
-
-
-
+def markdown_to_blocks(markdown):
+    return list(filter(lambda block: len(block) > 0, map(lambda block : block.strip() ,markdown.split('\n\n'))))
 
 

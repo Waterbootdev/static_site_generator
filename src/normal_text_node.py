@@ -2,6 +2,8 @@ from textnode import TextNode, TextType
 from commen_helpers import apply_pair, alternated_seq, reduce_lists, is_odd, apply_tripple
 from delimiter_text_type import DelimiterTextType
 from extract_markdown import extract_markdown_images_tip, extract_markdown_links_tip
+from functools import reduce
+
 class NORMALTextNode(TextNode):
 
     def __init__(self, text):
@@ -34,7 +36,7 @@ class NORMALTextNode(TextNode):
             return add_text_type() if is_odd(length) else do_not_split_up()  
 
         def filter_non_empty(seq):
-            return filter(lambda x: len(x[1]) > 0 , seq)
+           return filter(lambda x: len(x[1]) > 0 , seq)
 
         @ apply_pair
         def to_text_node(text_type, text):
@@ -55,7 +57,22 @@ class NORMALTextNode(TextNode):
         def split_node_delimiter(node):
             return node.split_node_delimiter(delimiter_text_type) if isinstance(node, NORMALTextNode) else [node] 
         return reduce_lists(map(split_node_delimiter, nodes))
+    
+    @staticmethod
+    def nodes_delimiter_splitter(delimiter_text_type):
+        def nodes_delimiter_splitter(nodes):
+            return NORMALTextNode.split_nodes_delimiter(nodes, delimiter_text_type)
+        return nodes_delimiter_splitter
 
+
+    @staticmethod 
+    def all_nodes_delimiter_splitter():
+        return list(map(NORMALTextNode.nodes_delimiter_splitter, DelimiterTextType))
+    
+    @staticmethod
+    def all_nodes_splitter():
+        return [NORMALTextNode.split_nodes_image, NORMALTextNode.split_nodes_link] + NORMALTextNode.all_nodes_delimiter_splitter()
+        
     @staticmethod
     def apply_split_node(split_node):
         def apply_split_node(node):
@@ -112,3 +129,12 @@ class NORMALTextNode(TextNode):
     def split_nodes_link(nodes):
         return NORMALTextNode.apply_split_nodes(NORMALTextNode._split_node_link, nodes)
     
+    @staticmethod 
+    def text_to_textnodes(text):
+        return reduce(lambda nodes, nodes_splitter: nodes_splitter(nodes), NORMALTextNode.all_nodes_splitter(), [NORMALTextNode(text)])
+
+
+
+
+
+
