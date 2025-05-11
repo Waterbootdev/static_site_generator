@@ -1,6 +1,6 @@
 import unittest
-
 import extract_markdown
+from heading_node import HeadingNode
 
 class TestExtractMarcdown(unittest.TestCase):
     
@@ -44,7 +44,7 @@ This is the same paragraph on a new line
 
         md = f"# {titel}"
 
-        self.assertEqual(stitel, extract_markdown.extract_titel(md))
+        self.assertEqual(stitel, HeadingNode.extract_titel(md))
 
  
 if __name__ == "__main__":

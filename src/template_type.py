@@ -1,5 +1,5 @@
 from enum import Enum
-from extract_markdown import extract_titel
+from heading_node import HeadingNode
 from div_node import markdown_to_html
 from functools import reduce
 from io_helpers import read_file, write_file, FileMode
@@ -15,7 +15,7 @@ def replace_template_type_value(template_type, template, value):
 def extract(template_type, markdown):
     match template_type:
         case TemplateType.TITEL:
-            return  extract_titel(markdown)
+            return HeadingNode.extract_titel(markdown)
         case TemplateType.CONTENT:
             return markdown_to_html(markdown)
         case _:

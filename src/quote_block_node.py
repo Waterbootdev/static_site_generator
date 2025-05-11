@@ -1,11 +1,12 @@
-from leaf_node import LeafNode
+from normal_text_node import NORMALTextNode
+from parent_node import ParentNode
 from commen_helpers import trim_left_first
 
-class QuoteBlockNode(LeafNode):
+class QuoteBlockNode(ParentNode):
     def __init__(self, block):
         def trim_quote(line):
-            return trim_left_first('>', line)
+            return trim_left_first('>', line)[1].strip()
 
-        value = ''.join(map(lambda t: t[1], map(trim_quote, block.splitlines())))
+        text = ''.join(map(trim_quote, block.splitlines()))
 
-        super().__init__('blockqoute', value)
+        super().__init__('blockquote', NORMALTextNode.text_to_html_nodes(text))

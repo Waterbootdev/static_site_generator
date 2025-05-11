@@ -132,6 +132,10 @@ class NORMALTextNode(TextNode):
     @staticmethod 
     def text_to_textnodes(text):
         return reduce(lambda nodes, nodes_splitter: nodes_splitter(nodes), NORMALTextNode.all_nodes_splitter(), [NORMALTextNode(text)])
+    
+    @staticmethod 
+    def text_to_html_nodes(text):
+        return list(map(TextNode.text_node_to_html_node , NORMALTextNode.text_to_textnodes(text)))
 
 
 

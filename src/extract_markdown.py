@@ -1,8 +1,7 @@
 from commen_helpers import apply_pair
 from re import findall
 from textnode import TextType
-from blocktype import BlockType, get_block_type
-from heading_node import HeadingNode
+from blocktype import get_block_type
 
 def add_text_type_to_extract_markdown(text_type):
 
@@ -51,21 +50,7 @@ def markdown_to_blocks(markdown):
 def select_block_type(markdown, block_type):
     blocks = [block for block in markdown_to_blocks(markdown) if get_block_type(block) == block_type]
     return blocks
-def extract_titel_nodes(markdown,):
-    return [node for node in map(HeadingNode, select_block_type(markdown, BlockType.HEADING)) if node.is_titel()]
 
-def extract_titel(markdown):
-    
-    titel_nodes = extract_titel_nodes(markdown)
-    length = len(titel_nodes)
-    
-    if length == 0:
-        raise Exception("can't find titel")
-
-    if length > 1:
-        print("Warning more then one titel")
-    
-    return titel_nodes[0].value
 
 
 
