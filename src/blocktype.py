@@ -23,17 +23,17 @@ def is_heading_block(_, block):
 
 # Code blocks must start with 3 backticks and end with 3 backticks.
 # but solution says a code clock has at least 2 lines and the first aswel the last line starts with 3 backticks 
-# but then the following woud be a code block (without leading #)
+# but then the following woud be a empty code block (without leading #)
 
-# ```
+# ```jkas;dhjkhs;kjhs;jhd
 # ```h;uihyihsihfhsihfi   
 
 
 def is_code_line(line):
-    return is_match_line(r"^`{3}.*`{3}$", line)
+    return False
 
 def is_code_block(lines, block):
-    return is_code_line(block)
+    return is_match_line(r"^`{3}", lines[0]) and is_match_line(r"^`{3}", lines[-1]) 
 
 def is_qoute_line(line):
     return line.startswith('>')

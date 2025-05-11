@@ -55,7 +55,7 @@ jkguhgu
 """
         blocks = markdown_to_blocks(markdown)
 
-        test = [BlockType.PARAGRAPH, BlockType.PARAGRAPH, BlockType.PARAGRAPH, BlockType.PARAGRAPH, BlockType.HEADING, BlockType.HEADING, BlockType.UNORDEREDLIST, BlockType.ORDEREDLIST, BlockType.ORDEREDLIST, BlockType.CODE, BlockType.CODE, BlockType.QUOTE]
+        test = [BlockType.PARAGRAPH, BlockType.PARAGRAPH, BlockType.PARAGRAPH, BlockType.PARAGRAPH, BlockType.HEADING, BlockType.HEADING, BlockType.UNORDEREDLIST, BlockType.ORDEREDLIST, BlockType.ORDEREDLIST, BlockType.PARAGRAPH, BlockType.CODE, BlockType.QUOTE]
 
         self.assertListEqual(list(map(get_block_type, blocks)), test)
         
