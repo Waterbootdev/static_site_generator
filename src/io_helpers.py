@@ -89,6 +89,11 @@ def change_file_ext(file_path, ext):
     splitted = path.splitext(file_path)
     return f"{splitted[0]}{ext}"
 
+
+
+def get_basepath(args):
+    return f"{path.dirname(path.dirname(args[0]))}/" if isinstance(args, list) and len(args) > 0 else '/'
+
     
 
 
