@@ -24,7 +24,7 @@ def alternated_seq(even, odd, length):
 
 
 def trim_left_first(value , inline):
-    line_parts = value.split(inline,  maxsplit=1) 
+    line_parts = inline.split(value,  maxsplit=1) 
     return len(line_parts[0]), line_parts[-1] 
 
 
