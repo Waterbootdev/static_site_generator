@@ -23,4 +23,9 @@ def alternated_seq(even, odd, length):
     return map(lambda index: even if is_even(index) else odd, range(length))
 
 
+def trim_left_first(value , inline):
+    line_parts = value.split(inline,  maxsplit=1) 
+    return len(line_parts[0]), line_parts[-1] 
+
+
 

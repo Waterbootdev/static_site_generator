@@ -1,4 +1,5 @@
 from functools import reduce
+
 class HTMLNode:
     def __init__(self, tag=None, value=None, children=None, props=None):
         
@@ -56,8 +57,4 @@ class HTMLNode:
     
     def add_html_begin_and_end_tag(self, tag_value):
         return f"{self.to_html_begin_tag()}{tag_value}{self.to_html_end_tag()}"
-        
-
-
-     
-
+    

@@ -12,7 +12,7 @@ class BlockType(Enum):
     PARAGRAPH="paragraph"
     
 def is_match_line(r, line):
-    return True if match(r, line) else False
+    return True if match(r, line)  else False
 
 def is_heading_line(line):
     return is_match_line(r"#{1,6}+\s", line)
