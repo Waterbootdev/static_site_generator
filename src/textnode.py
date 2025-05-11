@@ -32,9 +32,9 @@ class TextNode:
             case TextType.CODE:
                 return LeafNode("code", self.text)
             case TextType.LINKS:
-                return LeafNode("a", self.text, props={"href":self.url})
+                return LeafNode("a", self.text, props={"href":f"\"{self.url}\""})
             case TextType.IMAGES:
-                return LeafNode("img","",props={"src":self.url, "alt":self.text})
+                return LeafNode("img","",props={"src":f"\"{self.url}\"", "alt":self.text})
             case _:
                 raise Exception()
 
