@@ -26,7 +26,7 @@ class HTMLNode:
 
         if HTMLNode._is_not_none_and_not_type(tag, str):
             HTMLNode._raise_exception("tag has to be None or a str")
-      
+    
     @staticmethod
     def _is_not_none_and_not_type(parameter, parameter_type):
         return parameter is not None and type(parameter) is not parameter_type 

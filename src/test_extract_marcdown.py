@@ -38,6 +38,14 @@ This is the same paragraph on a new line
         
         self.assertListEqual(blocks, test)
 
+    def test_extract_titel(self):
+        titel = "    titel jshgjhfk     "
+        stitel = titel.strip()
+
+        md = f"# {titel}"
+
+        self.assertEqual(stitel, extract_markdown.extract_titel(md))
+
  
 if __name__ == "__main__":
     unittest.main()

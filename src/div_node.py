@@ -6,6 +6,11 @@ from extract_markdown import markdown_to_blocks
 class DivNode(ParentNode):
     def __init__(self, markdown):
         super().__init__('div', blocks_to_html_nodes(markdown_to_blocks(markdown)))
+    
+def markdown_to_html(markdown):
+    return DivNode(markdown).to_html()
+
+
 
 
 

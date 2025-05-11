@@ -8,4 +8,4 @@ class ListItemNode(LeafNode):
     @staticmethod
 
     def list_item_nodes(block):
-        map(ListItemNode, block.splitlines())
+        return list(map(ListItemNode, block.splitlines()))
