@@ -1,6 +1,5 @@
-from parent_node import ParentNode
-from list_item_node import ListItemNode
+from list_parent_node import ListParantNode
 
-class OrderedListNode(ParentNode):
+class OrderedListNode(ListParantNode):
     def __init__(self, block):
-        super().__init__("ol", ListItemNode.list_item_nodes(block))
+        super().__init__("ol", block)

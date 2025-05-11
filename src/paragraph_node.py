@@ -1,9 +1,8 @@
-from normal_text_node import NORMALTextNode
-from parent_node import ParentNode
+from none_list_parent_node import NoneListParentNode
 
-class ParagraphNode(ParentNode):
+class ParagraphNode(NoneListParentNode):
     def __init__(self, block):
-        super().__init__('p', NORMALTextNode.text_to_html_nodes(' '.join(block.splitlines())))
+        super().__init__('p', ' '.join(block.splitlines()))
 
 
 

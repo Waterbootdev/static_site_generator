@@ -2,7 +2,7 @@ from enum import Enum
 from heading_node import HeadingNode
 from div_node import markdown_to_html
 from functools import reduce
-from io_helpers import read_file, write_file, FileMode
+from io_helpers import read_file, write_file, FileMode, get_files, change_path_root, change_file_ext
 
 class TemplateType(Enum):
     TITEL='{{ Title }}'
@@ -51,6 +51,11 @@ def replace_template(from_path, template_path):
 
 def generate_page(from_path, template_path, dest_path):
     write_file(dest_path, replace_template(from_path, template_path), FileMode.CREATE)    
+
+def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
     
+    list(map(lambda file_path: generate_page(file_path, template_path,change_file_ext(change_path_root(file_path, dir_path_content, dest_dir_path),".html")), get_files(dir_path_content,'.md')))
+
+
     
 

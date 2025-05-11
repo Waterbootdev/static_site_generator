@@ -8,10 +8,6 @@ class FileMode(Enum):
     APPEND="a"
     WRITE="w"
 
-
-
-
-
 def copy_static_to_public():
 
     def remove_dest_dir(p='public'):
@@ -66,5 +62,43 @@ def mkdirectory(dir_path):
         mkdirectory(dir)
         if not path.exists(dir_path):
             mkdir(dir_path)
+
+
+def get_files(dir_path, ext):
+
+        path.splitext        
+        file_paths, dir_paths = list_dir_group(dir_path, ext)
+
+        def extend_(current):
+            file_paths.extend(current)
+
+        list(map(extend_, map(lambda next: get_files(next, ext), dir_paths)))
+
+        return file_paths      
+      
+def list_dir_group(dir_path, ext):
+    paths =[path.join(dir_path, p) for p in  listdir(dir_path)]
+    return [p for p in paths if path.isfile(p) and path.splitext(p)[1]==ext], [p for p in paths if path.isdir(p)]
+
+def change_path_root(file_path, current_root, root):
+    splitted = file_path.split(current_root, maxsplit=1)
+    new_path = f"{root}{splitted[1]}"
+    return new_path
+
+def change_file_ext(file_path, ext):
+    splitted = path.splitext(file_path)
+    return f"{splitted[0]}{ext}"
+
+    
+
+
+
+
+
+
+
+
+
+
 
 
