@@ -8,12 +8,12 @@ class FileMode(Enum):
     APPEND="a"
     WRITE="w"
 
-def copy_static_to_public():
+def copy_static_to_public(public='public'):
 
-    def remove_dest_dir(p='public'):
-        if path.exists(p):
-            rmtree(p)
-        mkdir(p)
+    def remove_dest_dir(public):
+        if path.exists(public):
+            rmtree(public)
+        mkdir(public)
 
     def copy_to_dest(source='static', dest='public'):
         def paths(name):
@@ -22,6 +22,7 @@ def copy_static_to_public():
         @apply_pair
         def copy_paths(source, dest):
             if path.isfile(source):
+                print(dest)
                 copy(source, dest)
             else:
                 mkdir(dest)
@@ -29,8 +30,8 @@ def copy_static_to_public():
     
         list(map(copy_paths, map(paths, listdir(source))))  
 
-    remove_dest_dir()
-    copy_to_dest()
+    remove_dest_dir(public)
+    copy_to_dest(dest=public)
 
 def read_file(file_path):
     if path.exists(file_path) and path.isfile(file_path):

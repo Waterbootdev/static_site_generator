@@ -5,11 +5,11 @@ import sys
 
 
 def main():    
-    
+    public = 'docs'
     basepath = get_basepath(sys.argv)
     print(f"basepath = {basepath}")
-    copy_static_to_public()
-    generate_pages_recursive("content","template.html","public", basepath)
+    copy_static_to_public(public=public)
+    generate_pages_recursive("content", "template.html", public, basepath)
 
 main()
 
